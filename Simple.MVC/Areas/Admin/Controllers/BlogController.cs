@@ -20,22 +20,23 @@ namespace Simple.MVC.Areas.Admin.Controllers
             return View(blog);
         }
 
-        public async Task<IActionResult> CreateAsync()
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Update()
         {
 
             return View();
         }
 
-        public async Task<IActionResult> UpdateAsync()
+        public IActionResult Delete(int id)
         {
-
-            return View();
-        }
-
-        public IActionResult Delete()
-        {
-
-            return View();
+            Blog blog = _context.Blogs.Find(id);
+            _context.Blogs.Remove(blog);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
